@@ -1,7 +1,7 @@
 multi-stream-viewer
 =====================
 
-Multiple twitch stream viewer
+Multiple stream viewer
 
 Usage
 =====

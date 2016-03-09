@@ -1,8 +1,8 @@
-var React         = require('react'),
-    ReactDOM      = require('react-dom'),
-    TestComponent = require('./components/TestComponent.jsx');
+var React         = require('react');
+var ReactDOM      = require('react-dom');
+var Viewer = require('./components/Viewer.jsx');
 
 ReactDOM.render(
-  <TestComponent/>,
-  document.getElementById("react-container")
+  <Viewer/>,
+  document.getElementById('react-container')
 );
