@@ -1,3 +1,5 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 var TwitchClient = require('node-twitch-api');
@@ -15,8 +17,9 @@ router.get('/api/viewer', function(req, res) {
   var client = new TwitchClient({
     'scope': 'user_read channel_real'
   });
+  res.send({test: client});
 
-  client.get('/channels/:channel/videos', {channel: 'user_name'}, function(err, res) {
+  client.get('/channels/:channel/videos', {channel: 'cigcommunity'}, function(err, res) {
     console.log(err || res);
   });
 });
