@@ -25,6 +25,20 @@ var Viewer = React.createClass({
     });
   },
 
+  handleLogin: function() {
+    $.ajax({
+      url: this.props.url + '/login',
+      dataType: '',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
   componentDidMount: function() {
     this.loadStreamsFromServer();
   },
@@ -33,7 +47,7 @@ var Viewer = React.createClass({
     return (
       <div>
         <h1>Multi Stream Viewer</h1>
-        <Login/>
+        <Login onLoginSubmit={this.handleLogin}/>
         <Search/>
         <StreamBox/>
       </div>

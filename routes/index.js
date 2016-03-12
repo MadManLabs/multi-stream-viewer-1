@@ -24,4 +24,13 @@ router.get('/api/viewer', function(req, res) {
   });
 });
 
+/**
+ * GET /api/login
+ * user login
+ */
+
+router.get('/api/login', function(req, res) {
+  res.send({data: '/api/login'});
+});
+
 module.exports = router;
