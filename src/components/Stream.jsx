@@ -7,7 +7,7 @@ var Stream = React.createClass({
     return (
       <div>
         <h4>Stream</h4>
-        {this.props.stream}
+        {this.props.channel}
       </div>
     );
   }

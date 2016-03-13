@@ -6,9 +6,9 @@ var Stream = require('./Stream.jsx');
 var StreamBox = React.createClass({
   render: function() {
     console.log('StreamBox', this.props.stream);
-    var streams = this.props.stream.map(function(stream) {
+    var streams = this.props.stream.map(function(channel) {
       return (
-        <Stream stream={stream.stream}/>
+        <Stream channel={channel.stream}/>
       );
     });
     return (
