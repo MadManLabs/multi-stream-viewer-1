@@ -8,16 +8,16 @@ var Login = require('./Login.jsx');
 var Viewer = React.createClass({
 
   getInitialState: function() {
-    return {data: []};
+    return {stream: []};
   },
 
   loadStreamsFromServer: function() {
     $.ajax({
       url: this.props.url,
-      dataType: '',
+      dataType: 'json',
       cache: false,
-      success: function(data) {
-        this.setState({data: data});
+      success: function(stream) {
+        this.setState({stream: stream});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -49,7 +49,7 @@ var Viewer = React.createClass({
         <h1>Multi Stream Viewer</h1>
         <Login onLoginSubmit={this.handleLogin}/>
         <Search/>
-        <StreamBox/>
+        <StreamBox stream={this.state.stream}/>
       </div>
     );
   }

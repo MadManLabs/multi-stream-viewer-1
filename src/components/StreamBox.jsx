@@ -5,10 +5,15 @@ var Stream = require('./Stream.jsx');
 
 var StreamBox = React.createClass({
   render: function() {
+    console.log('StreamBox', this.props.stream);
+    var streams = this.props.stream.map(function(stream) {
+      return (
+        <Stream stream={stream.stream}/>
+      );
+    });
     return (
       <div>
-        <h3>StreamBox</h3>
-        <Stream/>
+        {streams}
       </div>
     );
   }

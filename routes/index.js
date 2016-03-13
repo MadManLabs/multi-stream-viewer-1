@@ -17,7 +17,7 @@ router.get('/api/viewer', function(req, res) {
   var client = new TwitchClient({
     'scope': 'user_read channel_real'
   });
-  res.send({test: client});
+  res.send([{stream: 'GET /api/viewer'}]);
 
   client.get('/channels/:channel/videos', {channel: 'cigcommunity'}, function(err, res) {
     console.log(err || res);
@@ -30,7 +30,7 @@ router.get('/api/viewer', function(req, res) {
  */
 
 router.get('/api/login', function(req, res) {
-  res.send({data: '/api/login'});
+  res.send({stream: '/api/login'});
 });
 
 module.exports = router;

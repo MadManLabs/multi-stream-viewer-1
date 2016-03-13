@@ -7,7 +7,7 @@ var Login = React.createClass({
     e.preventDefault();
     var login = this.state.login.trim();
 
-    if(!login) {return;}
+    if(!login) return;
 
     this.props.onLoginSubmit({login: login});
     this.setState({login: ''});
