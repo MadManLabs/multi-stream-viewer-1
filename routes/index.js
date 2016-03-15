@@ -18,10 +18,13 @@ router.get('/api/viewer', function(req, res) {
   var client = new TwitchClient({
     'scope': 'user_read channel_real'
   });
-  res.send([{stream: 'GET /api/viewer'}]);
 
-  client.get('/channels/:channel/videos', {channel: 'cigcommunity'}, function(err, res) {
-    console.log(err || res);
+  client.get('/channels/:channel/videos', {channel: 'cigcommunity'}, function(err, data) {
+    if (err) throw err;
+    var video = data.videos[0].url;
+    console.log('>>>>>>>>>>>>>>> VIDEO', data.videos[0]);
+    var vid = 'http://player.twitch.tv/?channel=thebaseradio';
+    res.send([{stream: vid}]);
   });
 });
 
