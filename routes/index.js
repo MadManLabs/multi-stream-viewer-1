@@ -13,6 +13,7 @@ router.get('/', function(req, res) {
  * GET /api/viewer
  * viewer with up to 4 streams
  */
+
 router.get('/api/viewer', function(req, res) {
   var client = new TwitchClient({
     'scope': 'user_read channel_real'
@@ -31,6 +32,15 @@ router.get('/api/viewer', function(req, res) {
 
 router.get('/api/login', function(req, res) {
   res.send({stream: '/api/login'});
+});
+
+/**
+ * GET /api/search
+ * stream search
+ */
+
+router.get('/api/search', function(req, res) {
+  res.send({results: '/api/search'});
 });
 
 module.exports = router;

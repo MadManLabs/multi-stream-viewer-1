@@ -25,6 +25,20 @@ var Viewer = React.createClass({
     });
   },
 
+  handleSearch: function() {
+    $.ajax({
+      url: this.props.url + '/search',
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url + '/search', status, err.toString());
+      }
+    });
+  },
+
   handleLogin: function() {
     $.ajax({
       url: this.props.url + '/login',
@@ -34,7 +48,7 @@ var Viewer = React.createClass({
         this.setState({data: data});
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
+        console.error(this.props.url + '/login', status, err.toString());
       }.bind(this)
     });
   },
@@ -48,7 +62,7 @@ var Viewer = React.createClass({
       <div>
         <h1>Multi Stream Viewer</h1>
         <Login onLoginSubmit={this.handleLogin}/>
-        <Search/>
+        <Search onSearchSubmit={this.handleSearch}/>
         <StreamBox stream={this.state.stream}/>
       </div>
     );
