@@ -15,7 +15,7 @@ var Viewer = React.createClass({
     $.ajax({
       url: this.props.url,
       dataType: 'json',
-      cache: false,
+      cache: true,
       success: function(stream) {
         this.setState({stream: stream});
       }.bind(this),
@@ -35,7 +35,7 @@ var Viewer = React.createClass({
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url + '/search', status, err.toString());
-      }
+      }.bind(this)
     });
   },
 

@@ -19,10 +19,9 @@ router.get('/api/viewer', function(req, res) {
     'scope': 'user_read channel_real'
   });
 
-  client.get('/channels/:channel/videos', {channel: 'cigcommunity'}, function(err, data) {
+  client.get('/channels/:channel/videos', {channel: 'thebaseradio'}, function(err, data) {
     if (err) throw err;
-    var video = data.videos[0].url;
-    console.log('>>>>>>>>>>>>>>> VIDEO', data.videos[0]);
+    var video = data;
     var vid = 'http://player.twitch.tv/?channel=thebaseradio';
     res.send([{stream: vid}]);
   });
@@ -38,11 +37,11 @@ router.get('/api/login', function(req, res) {
 });
 
 /**
- * GET /api/search
+ * GET /api/viewer/search
  * stream search
  */
 
-router.get('/api/search', function(req, res) {
+router.get('/api/viewer/search', function(req, res) {
   res.send({results: '/api/search'});
 });
 
