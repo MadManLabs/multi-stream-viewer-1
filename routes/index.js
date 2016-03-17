@@ -2,6 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
+var Stream = require('../models/stream');
 var TwitchClient = require('node-twitch-api');
 
 /* GET home page. */
@@ -15,6 +16,9 @@ router.get('/', function(req, res) {
  */
 
 router.get('/api/viewer', function(req, res) {
+
+
+
   var client = new TwitchClient({
     'scope': 'user_read channel_real'
   });

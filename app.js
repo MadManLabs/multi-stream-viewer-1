@@ -7,6 +7,16 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 
+// database
+var mongoose = require('mongoose');
+var Stream = require('./models/stream.js');
+var config = require('./config.js');
+
+mongoose.connect(config.database);
+mongoose.connection.on('error', function() {
+  console.info('Error: Could not connect to MongoDB. Did you remember to run "mongod"?');
+});
+
 var app = express();
 
 // view engine setup
