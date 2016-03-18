@@ -64,7 +64,6 @@ router.get('/api/login', function(req, res) {
 
 router.get('/api/viewer/search', function(req, res) {
   var searchResult = req.body.channel;
-  console.log('>>>>>>>>>>>>>>> searchResult', searchResult);
   res.send({results: '/api/search'});
 });
 
