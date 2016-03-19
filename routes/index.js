@@ -62,9 +62,8 @@ router.get('/api/login', function(req, res) {
  * stream search
  */
 
-router.get('/api/viewer/search', function(req, res) {
-  var searchResult = req.body.channel;
-  res.send({results: '/api/search'});
+router.post('/api/viewer/search', function(req, res) {
+  var input = req.body.channel;
 });
 
 module.exports = router;

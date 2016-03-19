@@ -25,11 +25,13 @@ var Viewer = React.createClass({
     });
   },
 
-  handleSearch: function() {
+  handleSearch: function(search) {
     $.ajax({
       url: this.props.url + '/search',
       dataType: 'json',
       cache: false,
+      type: 'POST',
+      data: search,
       success: function(data) {
         this.setState({data: data});
       }.bind(this),
@@ -45,7 +47,7 @@ var Viewer = React.createClass({
       dataType: '',
       cache: false,
       success: function(data) {
-        this.setState({data: data});
+        this.setState({channel: data});
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url + '/login', status, err.toString());
