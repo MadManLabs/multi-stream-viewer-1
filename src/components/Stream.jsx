@@ -7,8 +7,7 @@ var Stream = React.createClass({
   render: function() {
     return (
       <div>
-        <h4>Stream</h4>
-        <Iframe className="iframe" url={this.props.channel} height="50%" width="50%"/>
+        <Iframe className="iframe" url={this.props.channel} position="relative" height="50%" width="50%"/>
       </div>
     );
   }

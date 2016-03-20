@@ -27,10 +27,8 @@ router.get('/api/viewer', function(req, res, next) {
         res.send([{stream: streamLink + 'twitch'}]);
       } else {
         var streamUrls = streams.map(function(stream) {
-          console.log('streamLink', streamLink);
-          return {stream: streamLink + stream};
+          return {stream: streamLink + stream.channel};
         });
-        console.log(streamUrls);
         res.send(streamUrls);
       }
     });
@@ -62,8 +60,19 @@ router.get('/api/login', function(req, res) {
  * stream search
  */
 
-router.post('/api/viewer/search', function(req, res) {
+router.post('/api/viewer/search', function(req, res, next) {
   var input = req.body.channel;
+  var streamLink = 'http://player.twitch.tv/?channel=';
+  console.log(input);
+
+  Stream.find({channel: input})
+    .exec(function(err, stream, next) {
+      if (err) return next(err);
+
+      if (stream.length === 0) {
+      } else {
+      }
+    });
 });
 
 module.exports = router;

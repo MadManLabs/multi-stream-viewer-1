@@ -9,11 +9,12 @@ var StreamBox = React.createClass({
     var streams = this.props.stream.map(function(channel) {
       key++;
       return (
-        <Stream channel={channel.stream} key={key}/>
+          <Stream channel={channel.stream} key={key}/>
       );
     });
     return (
       <div>
+        <h3>Streams</h3>
         {streams}
       </div>
     );
