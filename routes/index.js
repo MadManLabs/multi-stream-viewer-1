@@ -7,7 +7,9 @@ var TwitchClient = require('node-twitch-api');
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Main' });
+  res.render('index', {
+    title: 'Main'
+  });
 });
 
 /**
@@ -20,29 +22,21 @@ router.get('/api/viewer', function(req, res, next) {
 
   Stream.find()
     .exec(function(err, streams) {
-      console.log('streams', streams);
       if (err) return next(err);
 
       if (streams.length === 0) {
-        res.send([{stream: streamLink + 'twitch'}]);
+        res.send([{
+          stream: streamLink + 'twitch'
+        }]);
       } else {
         var streamUrls = streams.map(function(stream) {
-          return {stream: streamLink + stream.channel};
+          return {
+            stream: streamLink + stream.channel
+          };
         });
         res.send(streamUrls);
       }
     });
-
-  // var client = new TwitchClient({
-  //   'scope': 'user_read channel_real'
-  // });
-
-  // client.get('/channels/:channel/videos', {channel: 'thebaseradio'}, function(err, data) {
-  //   if (err) throw err;
-  //   var video = data;
-  //   var vid = 'http://player.twitch.tv/?channel=thebaseradio';
-  //   res.send([{stream: vid}]);
-  // });
 
 });
 
@@ -52,7 +46,9 @@ router.get('/api/viewer', function(req, res, next) {
  */
 
 router.get('/api/login', function(req, res) {
-  res.send({stream: '/api/login'});
+  res.send({
+    stream: '/api/login'
+  });
 });
 
 /**
@@ -63,16 +59,20 @@ router.get('/api/login', function(req, res) {
 router.post('/api/viewer/search', function(req, res, next) {
   var input = req.body.channel;
   var streamLink = 'http://player.twitch.tv/?channel=';
-  console.log(input);
 
-  Stream.find({channel: input})
-    .exec(function(err, stream, next) {
-      if (err) return next(err);
+  Stream.search(input, function(err, searchResults) {
+    console.log('>>>>>>>>>> input & searchResults', input, searchResults);
+    if (err) throw err;
 
-      if (stream.length === 0) {
-      } else {
+    if (!err) {
+      for (var i = 0; i < searchResults.length; i++) {
+        if (input === searchResults[i]) {
+          console.log('>>>>>>>>>>>>> MATCH', input, searchResults[i]);
+        }
       }
-    });
+    }
+  });
+
 });
 
 module.exports = router;
