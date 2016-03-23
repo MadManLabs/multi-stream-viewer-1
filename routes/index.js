@@ -62,13 +62,10 @@ router.post('/api/viewer/search', function(req, res, next) {
 
   Stream.search(input, function(err, searchResults) {
     console.log('>>>>>>>>>> input & searchResults', input, searchResults);
-    if (err) throw err;
 
     if (!err) {
       for (var i = 0; i < searchResults.length; i++) {
-        if (input === searchResults[i]) {
-          console.log('>>>>>>>>>>>>> MATCH', input, searchResults[i]);
-        }
+        console.log('searchResults', searchResults);
       }
     }
   });
