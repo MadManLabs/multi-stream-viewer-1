@@ -8,7 +8,11 @@ var streamSchema = new mongoose.Schema({
 });
 
 streamSchema.plugin(searchPlugin, {
-  fields: 'channel'
+  keywordsPath: '_keywords',
+  relavancePath: '_relevance',
+  fields: ['channel'],
+  stemmer: 'PorterStemmer',
+  distance: 'JaroWinklerDistance'
 });
 
 module.exports = mongoose.model('Stream', streamSchema);

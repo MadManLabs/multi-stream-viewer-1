@@ -57,18 +57,23 @@ router.get('/api/login', function(req, res) {
  */
 
 router.post('/api/viewer/search', function(req, res, next) {
-  var input = req.body.channel;
+  var input = String(req.body.channel);
   var streamLink = 'http://player.twitch.tv/?channel=';
 
-  Stream.search(input, function(err, searchResults) {
-    console.log('>>>>>>>>>> input & searchResults', input, searchResults);
-
-    if (!err) {
-      for (var i = 0; i < searchResults.length; i++) {
-        console.log('searchResults', searchResults);
-      }
-    }
+  var newStream = new Stream({
+    channel: input
   });
+
+  Stream.search(input, function(err, data) {
+    console.log('Search data for:', input, data);
+  });
+
+
+  // db match
+  Stream.find({channel: input})
+    .exec(function(err, results) {
+      // console.log('INPUT', input, result);
+    });
 
 });
 
