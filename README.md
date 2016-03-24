@@ -1,7 +1,8 @@
 multi-stream-viewer
 =====================
 
-Multiple stream viewer
+Multiple stream viewer (WIP)
+
 
 Usage
 =====

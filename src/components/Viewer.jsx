@@ -39,6 +39,7 @@ var Viewer = React.createClass({
         console.error(this.props.url + '/search', status, err.toString());
       }.bind(this)
     });
+    this.forceUpdate(this.loadStreamsFromServer());
   },
 
   handleLogin: function() {

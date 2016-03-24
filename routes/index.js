@@ -59,21 +59,51 @@ router.get('/api/login', function(req, res) {
 router.post('/api/viewer/search', function(req, res, next) {
   var input = String(req.body.channel);
   var streamLink = 'http://player.twitch.tv/?channel=';
-
-  var newStream = new Stream({
+  var channel = {
     channel: input
+  };
+
+  var client = new TwitchClient({
+    'scope': 'user_read channel_read'
   });
 
-  Stream.search(input, function(err, data) {
-    console.log('Search data for:', input, data);
+  client.get('/streams/:channel', channel, function(err, data) {
+    if (err) return err;
+
+    if (data.stream == null) {
+      console.log('No Stream Available.');
+    } else if (data.stream !== null) {
+
+      var newStream = new Stream({
+        channel: input
+      });
+
+      newStream.save(function(err) {
+        if (err) return next(err);
+
+        if (!err) {
+          Stream.find()
+            .exec(function(err, streams) {
+              if (err) return next(err);
+
+              var streamUrls = streams.map(function(stream) {
+                return {
+                  stream: streamLink + stream.channel
+                };
+              });
+              console.log('streamUrls', streamUrls);
+              res.send(streamUrls);
+            });
+        }
+      });
+
+      // Stream.search(input, function(err, data) {
+      //   console.log('Search data for:', input, data);
+      // });
+
+    }
+
   });
-
-
-  // db match
-  Stream.find({channel: input})
-    .exec(function(err, results) {
-      // console.log('INPUT', input, result);
-    });
 
 });
 
