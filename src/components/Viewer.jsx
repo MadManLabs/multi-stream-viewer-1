@@ -63,7 +63,6 @@ var Viewer = React.createClass({
   render: function() {
     return (
       <div>
-        <h1>Multi Stream Viewer</h1>
         <Login onLoginSubmit={this.handleLogin}/>
         <Search onSearchSubmit={this.handleSearch}/>
         <StreamBox stream={this.state.stream}/>
