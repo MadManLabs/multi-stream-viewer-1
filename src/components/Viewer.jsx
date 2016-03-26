@@ -34,12 +34,12 @@ var Viewer = React.createClass({
       data: search,
       success: function(data) {
         this.setState({data: data});
+        this.forceUpdate(this.loadStreamsFromServer());
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url + '/search', status, err.toString());
       }.bind(this)
     });
-    this.forceUpdate(this.loadStreamsFromServer());
   },
 
   handleLogin: function() {
