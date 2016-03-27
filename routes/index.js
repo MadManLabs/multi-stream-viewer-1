@@ -68,34 +68,43 @@ router.post('/api/viewer/search', function(req, res, next) {
   });
 
   client.get('/streams/:channel', channel, function(err, data) {
+
     if (err) return err;
 
     if (data.stream == null) {
       console.log('No Stream Available.');
     } else if (data.stream !== null) {
 
-      var newStream = new Stream({
-        channel: input
-      });
+      Stream.count()
+        .exec(function(err, count) {
+          if (err) return next(err);
 
-      newStream.save(function(err) {
-        if (err) return next(err);
+          if (count < 4) {
+            var newStream = new Stream({
+              channel: input
+            });
 
-        if (!err) {
-          Stream.find()
-            .exec(function(err, streams) {
+            newStream.save(function(err) {
               if (err) return next(err);
 
-              var streamUrls = streams.map(function(stream) {
-                return {
-                  stream: streamLink + stream.channel
-                };
-              });
-              console.log('streamUrls', streamUrls);
-              res.send(streamUrls);
+              if (!err) {
+                Stream.find()
+                  .exec(function(err, streams) {
+                    if (err) return next(err);
+
+                    var streamUrls = streams.map(function(
+                      stream) {
+                      return {
+                        stream: streamLink + stream.channel
+                      };
+                    });
+                    res.send(streamUrls);
+                  });
+              }
             });
-        }
-      });
+          }
+        });
+
 
       // Stream.search(input, function(err, data) {
       //   console.log('Search data for:', input, data);
