@@ -77,7 +77,7 @@ router.post('/api/viewer/search', function(req, res, next) {
 
       Stream.count()
         .exec(function(err, count) {
-          if (err) return next(err);
+          if (err) return err;
 
           if (count < 4) {
             var newStream = new Stream({
@@ -85,7 +85,7 @@ router.post('/api/viewer/search', function(req, res, next) {
             });
 
             newStream.save(function(err) {
-              if (err) return next(err);
+              if (err) return err;
 
               if (!err) {
                 Stream.find()

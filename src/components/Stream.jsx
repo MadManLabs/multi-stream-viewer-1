@@ -6,8 +6,9 @@ var Iframe = require('react-iframe');
 var Stream = React.createClass({
   render: function() {
     return (
-      <div>
-        <Iframe className="iframe" url={this.props.channel} position="relative" height="50%" width="50%"/>
+      <div className="col-lg-6">
+        <Iframe className="iframe" url={this.props.channel} position="relative" height="300px" width="500px"/>
+        <button type="button" className="btn btn-default">Delete</button>
       </div>
     );
   }
