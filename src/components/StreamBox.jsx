@@ -9,14 +9,18 @@ var StreamBox = React.createClass({
     var targetedStreamId = e.target.id;
     if (!targetedStreamId) return;
 
-    this.prop.onDelete({stream: targetedStreamId});
+    this.props.onDelete({stream: targetedStreamId});
   },
   render: function() {
+    var self = this;
     var key = 0;
     var streams = this.props.stream.map(function(channel) {
       key++;
       return (
+        <div>
           <Stream channel={channel.stream} key={key}/>
+          <button type="button" onClick={self.deleteStream} id={channel.stream} className="btn btn-default"><span className="glyphicon glyphicon-remove"></span></button>
+        </div>
       );
     });
     return (

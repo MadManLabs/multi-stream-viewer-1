@@ -13,6 +13,7 @@ var Search = React.createClass({
 
   handleSubmit: function(e) {
     e.preventDefault();
+    console.log('>>>>>>>>>>>>>>>>>>>> handleSubmit', e);
     var channel = this.state.channel.trim();
     if (!channel) {return;}
 

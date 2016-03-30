@@ -8,7 +8,6 @@ var Stream = React.createClass({
     return (
       <div className="col-lg-6">
         <Iframe className="iframe" url={this.props.channel} position="relative" height="300px" width="500px"/>
-        <button type="button" className="btn btn-default">Delete</button>
       </div>
     );
   }
