@@ -56,6 +56,18 @@ var Viewer = React.createClass({
     });
   },
 
+  handleDelete: function() {
+    $.ajax({
+      url: this.props.url + '/delete',
+      sucess: function(data) {
+        this.setState({channel: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url + '/delete', status, err.toString());
+      }.bind(this)
+    });
+  },
+
   componentDidMount: function() {
     this.loadStreamsFromServer();
   },
@@ -65,7 +77,7 @@ var Viewer = React.createClass({
       <div>
         <Login onLoginSubmit={this.handleLogin}/>
         <Search onSearchSubmit={this.handleSearch}/>
-        <StreamBox stream={this.state.stream}/>
+        <StreamBox stream={this.state.stream} onDelete={this.handleDelete}/>
       </div>
     );
   }
