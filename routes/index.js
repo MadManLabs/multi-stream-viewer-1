@@ -52,7 +52,7 @@ router.get('/api/login', function(req, res) {
 });
 
 /**
- * GET /api/viewer/search
+ * POST /api/viewer/search
  * stream search
  */
 
@@ -104,16 +104,18 @@ router.post('/api/viewer/search', function(req, res, next) {
             });
           }
         });
-
-
-      // Stream.search(input, function(err, data) {
-      //   console.log('Search data for:', input, data);
-      // });
-
     }
-
   });
-
 });
+
+/**
+* DELETE /api/viewer/delete
+* stream search
+*/
+
+router.post('/api/viewer/delete', function(req, res, next) {
+  var requestedStream = req.body;
+});
+
 
 module.exports = router;

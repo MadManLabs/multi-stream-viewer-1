@@ -56,10 +56,12 @@ var Viewer = React.createClass({
     });
   },
 
-  handleDelete: function() {
+  handleDelete: function(stream) {
     $.ajax({
       url: this.props.url + '/delete',
-      sucess: function(data) {
+      data: stream,
+      type: 'POST',
+      success: function(data) {
         this.setState({channel: data});
       }.bind(this),
       error: function(xhr, status, err) {
