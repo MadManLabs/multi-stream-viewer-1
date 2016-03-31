@@ -17,14 +17,14 @@ var StreamBox = React.createClass({
     var streams = this.props.stream.map(function(channel) {
       key++;
       return (
-        <div>
+        <div className="col-lg-6">
           <Stream channel={channel.stream} key={key}/>
-          <button type="button" onClick={self.deleteStream} id={channel.stream} className="btn btn-default"><span className="glyphicon glyphicon-remove"></span></button>
+          <button type="button" onClick={self.deleteStream} id={channel.stream} className="btn btn-default delete"><span className="glyphicon glyphicon-remove"></span></button>
         </div>
       );
     });
     return (
-      <div>
+      <div className="row">
         <h3>Streams</h3>
         {streams}
       </div>
