@@ -34,7 +34,7 @@ var Viewer = React.createClass({
       data: search,
       success: function(data) {
         this.setState({data: data});
-        this.forceUpdate(this.loadStreamsFromServer());
+        this.forceUpdate(this.loadStreamsFromServer);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url + '/search', status, err.toString());
@@ -68,6 +68,7 @@ var Viewer = React.createClass({
         console.error(this.props.url + '/delete', status, err.toString());
       }.bind(this)
     });
+    this.forceUpdate(this.loadStreamsFromServer);
   },
 
   componentDidMount: function() {

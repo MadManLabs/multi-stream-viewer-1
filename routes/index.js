@@ -114,7 +114,15 @@ router.post('/api/viewer/search', function(req, res, next) {
 */
 
 router.post('/api/viewer/delete', function(req, res, next) {
-  var requestedStream = req.body;
+  var requestedStreamUrl = req.body.stream;
+  var stream = requestedStreamUrl.split('=')[1];
+
+  Stream.findOne({channel: stream}, function(err, stream) {
+    if (err) return err;
+
+    stream.remove();
+
+  });
 });
 
 
