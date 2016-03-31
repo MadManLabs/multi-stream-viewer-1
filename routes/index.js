@@ -19,6 +19,7 @@ router.get('/', function(req, res) {
 
 router.get('/api/viewer', function(req, res, next) {
   var streamLink = 'http://player.twitch.tv/?channel=';
+  var muteStream = '&muted=true';
 
   Stream.find()
     .exec(function(err, streams) {
@@ -31,7 +32,7 @@ router.get('/api/viewer', function(req, res, next) {
       } else {
         var streamUrls = streams.map(function(stream) {
           return {
-            stream: streamLink + stream.channel
+            stream: streamLink + stream.channel + muteStream
           };
         });
         res.send(streamUrls);
@@ -59,6 +60,7 @@ router.get('/api/login', function(req, res) {
 router.post('/api/viewer/search', function(req, res, next) {
   var input = String(req.body.channel);
   var streamLink = 'http://player.twitch.tv/?channel=';
+  var muteStream = '&muted=true';
   var channel = {
     channel: input
   };
@@ -95,7 +97,7 @@ router.post('/api/viewer/search', function(req, res, next) {
                     var streamUrls = streams.map(function(
                       stream) {
                       return {
-                        stream: streamLink + stream.channel
+                        stream: streamLink + stream.channel + muteStream
                       };
                     });
                     res.send(streamUrls);
@@ -115,7 +117,7 @@ router.post('/api/viewer/search', function(req, res, next) {
 
 router.post('/api/viewer/delete', function(req, res, next) {
   var requestedStreamUrl = req.body.stream;
-  var stream = requestedStreamUrl.split('=')[1];
+  var stream = requestedStreamUrl.split('=')[1].split('&')[0];
 
   Stream.findOne({channel: stream}, function(err, stream) {
     if (err) return err;

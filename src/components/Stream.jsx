@@ -1,12 +1,18 @@
 'use strict';
 
 var React = require('react');
-var Iframe = require('react-iframe');
 
 var Stream = React.createClass({
   render: function() {
     return (
-        <Iframe className="iframe" url={this.props.channel} position="relative" height="400px" width="800px"/>
+      <iframe
+          src={this.props.channel}
+          height="400"
+          width="800"
+          frameboarder="5"
+          scrolling="no"
+          allowfullscreen="true">
+      </iframe>
     );
   }
 });
